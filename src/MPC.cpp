@@ -6,8 +6,8 @@
 using CppAD::AD;
 
 // TODO: Set the timestep length and duration
-size_t N = 10;
-double dt = 0.1;
+size_t N = 15;
+double dt = 0.12;
 
 // TODO: watch this video!!
 // https://www.youtube.com/watch?v=bOQuhpz3YfU&list=PLAwxTw4SYaPnfR7TzRZN-uxlxGbqxhtm2&index=5
@@ -23,7 +23,7 @@ double dt = 0.1;
 //
 // This is the length from front to CoG that has a similar radius.
 const double Lf = 2.67;
-double ref_v = 20;
+double ref_v = 30;
 
 size_t x_start = 0;
 size_t y_start = x_start + N;
@@ -53,7 +53,7 @@ class FG_eval {
 	 // The part of the cost based on the reference state.
 	 for (int t = 0; t < N; t++) {
 	   fg[0] += 2000 * CppAD::pow(vars[cte_start + t], 2); // costs from cte
-	   fg[0] += 2000 * CppAD::pow(vars[epsi_start + t], 2); // costs from epsi
+	   fg[0] += 3000 * CppAD::pow(vars[epsi_start + t], 2); // costs from epsi
 	   fg[0] += CppAD::pow(vars[v_start + t] - ref_v, 2);
 	 }
 
