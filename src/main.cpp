@@ -124,7 +124,7 @@ int main() {
           //double throttle_value = j[1]["throttle"];
 
           Eigen::VectorXd state(6);
-          state << 0, 0, 0, v, cte, epsi;
+          state << 0.1*v, 0, 0, v, cte, epsi;
           auto vars = mpc.Solve(state, coeffs);
 
           double Lf = 2.67;
