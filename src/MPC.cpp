@@ -9,7 +9,6 @@ using CppAD::AD;
 size_t N = 15;
 double dt = 0.12;
 
-// TODO: watch this video!!
 // https://www.youtube.com/watch?v=bOQuhpz3YfU&list=PLAwxTw4SYaPnfR7TzRZN-uxlxGbqxhtm2&index=5
 
 // This value assumes the model presented in the classroom is used.

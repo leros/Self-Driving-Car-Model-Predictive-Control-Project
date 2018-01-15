@@ -114,10 +114,6 @@ int main() {
           // Orientation Error
           double epsi = -atan(coeffs[1]);
 
-          //std::cout << "--------------------------------" << std::endl;
-          //std::cout << ptsx[0] <<" " << ptsx[1] <<" " << ptsy[0] <<" " << ptsy[1] << std::endl;
-          //std::cout << cte <<" " << epsi << std::endl;
-          //std::cout << "--------------------------------" << std::endl;
           /*
           * TODO: Calculate steering angle and throttle using MPC.
           *
@@ -168,7 +164,7 @@ int main() {
 
 
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
-          //std::cout << msg << std::endl;
+
           // Latency
           // The purpose is to mimic real driving conditions where
           // the car does actuate the commands instantly.
