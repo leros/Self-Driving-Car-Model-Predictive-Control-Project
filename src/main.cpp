@@ -120,14 +120,22 @@ int main() {
           * Both are in between [-1, 1].
           *
           */
-          //double steer_value = j[1]["steering_angle"];
-          //double throttle_value = j[1]["throttle"];
-
           Eigen::VectorXd state(6);
-          state << 0.1*v, 0, 0, v, cte, epsi;
+
+          // predict state in 100ms
+          double latency = 0.1;
+          const double Lf = 2.67;
+          double steer_value = j[1]["steering_angle"];
+          double throttle_value = j[1]["throttle"];
+          double new_x, new_psi, new_v;
+          new_x = latency * v;
+          new_psi = -v * steer_value/Lf*latency;
+          new_v = v + throttle_value*latency;
+
+          state << new_x, 0, new_psi, new_v, cte, epsi;
+
           auto vars = mpc.Solve(state, coeffs);
 
-          double Lf = 2.67;
           json msgJson;
           // NOTE: Remember to divide by deg2rad(25) before you send the steering value back.
           // Otherwise the values will be in between [-deg2rad(25), deg2rad(25] instead of [-1, 1].

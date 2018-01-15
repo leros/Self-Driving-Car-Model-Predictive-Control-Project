@@ -31,8 +31,7 @@ Some guidelines and tradeoffs for choosing the parameters:
 - dt should be as small as possible. A larger dt would result in less frequent actuation, which makes it harder to accurately approximate a continuous reference trajectory when the vehicle is turning round.
 - Since N determine the number of variables optimized by the MPC, it dominates the computational cost. 
 
-The final parameters I used are N = 12, dt = 0.12 and ref_v = 60, which means the car could drive at a speed of 60 mph in the simulation. I tried to increase N or reduce dt, which didn't give good results. 
-
+The final parameters I used are N = 10, dt = 0.10 and ref_v = 80, which means the car could drive at a speed up to 80 mph in the simulation. I tried the combination of N = 12 and dt = 0.12,  which didn't give good results when the car drove as fast as 80 mph.
 
 ## Polynomial Fitting and MPC Preprocessing
 - I used a third-degree polynomial function to fit the waypoints to create a reference trajectory.
@@ -41,7 +40,23 @@ The final parameters I used are N = 12, dt = 0.12 and ref_v = 60, which means th
 
 
 ## Model Predictive Control with Latency
-I incorporated the latency into the model by using the vehicle model starting from the current statue for the duration of the latency. That is what `0.1*v` in line 127 of main.cpp used for. In this way, MPC could deal with latency by explicity taking it into account.
+I incorporated the latency into the model by using the vehicle model starting from the current statue for the duration of the latency. 
+
+``` C++
+// predict state in 100ms
+double latency = 0.1;
+const double Lf = 2.67;
+double steer_value = j[1]["steering_angle"];
+double throttle_value = j[1]["throttle"];
+double new_x, new_psi, new_v;
+new_x = latency * v;
+new_psi = -v*steer_value/Lf*latency;
+new_v = v + throttle_value*latency;
+
+state << new_x, 0, new_psi, new_v, cte, epsi;
+```
+
+In this way, MPC could deal with latency by explicity taking it into account.
 
 
 
