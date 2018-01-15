@@ -6,8 +6,8 @@
 using CppAD::AD;
 
 // TODO: Set the timestep length and duration
-size_t N = 15;
-double dt = 0.08;
+size_t N = 20;
+double dt = 0.09;
 
 // https://www.youtube.com/watch?v=bOQuhpz3YfU&list=PLAwxTw4SYaPnfR7TzRZN-uxlxGbqxhtm2&index=5
 
@@ -22,7 +22,7 @@ double dt = 0.08;
 //
 // This is the length from front to CoG that has a similar radius.
 const double Lf = 2.67;
-double ref_v = 30;
+double ref_v = 40;
 
 size_t x_start = 0;
 size_t y_start = x_start + N;
