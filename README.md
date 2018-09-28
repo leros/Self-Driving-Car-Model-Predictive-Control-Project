@@ -1,5 +1,10 @@
-# CarND-Controls-MPC
-Self-Driving Car Engineer Nanodegree Program
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+
+
+### PART 2: Sensor Fusion, Localization, and Control
+### Project 5: Model Predictive Control
+
+In this project I implement Model Predictive Control to drive the car around the track. This time however the cross track error is not given, I'll have to calculate that myself! Additionally, there's a 100 millisecond latency between actuations commands on top of the connection latency.
 
 ---
 
